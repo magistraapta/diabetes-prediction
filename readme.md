@@ -63,3 +63,5 @@ Dalam fungsi classification_report dapat menampilkan beberapa metrcis seperti be
 | accuracy     |           |        | 0.97     | 20000   |
 | macro avg    | 0.84      | 0.96   | 0.89     | 20000   |
 | weighted avg | 0.98      | 0.97   | 0.97     | 20000   |
+
+![confusion_matrix](https://github.com/user-attachments/assets/7f48b0b5-5cf7-484e-a041-599e2df4567e)
