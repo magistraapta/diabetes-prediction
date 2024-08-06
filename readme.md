@@ -92,6 +92,7 @@ Dalam fungsi classification_report dapat menampilkan beberapa metrcis seperti be
 | accuracy     |           |        | 0.91     | 3400    |
 | macro avg    | 0.91      | 0.91   | 0.91     | 3400    |
 | weighted avg | 0.91      | 0.91   | 0.91     | 3400    |
+
 Dari tabel classification_report tersebut dapat kita ambil bahwa:
 - Precision: Model yang saya gunakan dapat dengan baik untuk memprediksi dataset terhadap orang yang tidak memiliki diabetes dan yang memiliki diabetes sebesar 91%.
 - Recall: Model yang saya gunakan mendapatkan hasil untuk data tidak memiliki diabetes dan yang memiliki diabetes sebesar 91%.
