@@ -72,7 +72,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # Modelling
 Pada tahap modelling dikarenakan pada projek ini bertujuan untuk memprediksi apakah seseorang memiliki risiko diabetes atau tidak berarti untuk kasus ini termasuk kasus klasifikasi sebab kita harus membedakan antara orang yang memiliki risiko penyakit diabetes dengan yang tidak. 
 
-Untuk melakukan prediksi tersebut saya menggunakan linear model dari Scikit-learn yaitu Random Forest Classifier dengan basic parameter. Random Forest adalah salah satu model yang cukup sering digunakan untuk melakukan klasifikasi. Random Forest bisa memberikan hasil yang lebih akurat karena dapat menggabungkan hasil dari banyak Decision Tree yang berbeda. Selain itu, model Random Forest juga cukup tahan terhadap overfitting jika dibandingkan dengan model ensemble learning lainnya.
+Untuk melakukan prediksi tersebut saya menggunakan model ensemble learning dari Scikit-learn yaitu Random Forest Classifier dengan basic parameter. Random Forest adalah salah satu model yang cukup sering digunakan untuk melakukan klasifikasi. Sedankgan ensemble learning adalah sebuah teknik dalam machine learning di mana beberapa model digabungkan untuk meningkatkan kinerja prediksi. 
+
+Random Forest bisa memberikan hasil yang lebih akurat karena dapat menggabungkan hasil dari banyak Decision Tree yang berbeda. Selain itu, model Random Forest juga cukup tahan terhadap overfitting jika dibandingkan dengan model ensemble learning lainnya.
 
 # Evaluasi
 Setelah melakukan training dengan train_set menggunakan model Random Forest, saya melakulan evaluasi dengan metrics classification_report dari library Scikit-learn untuk mengecek hasil dari model yang sudah di train dengan memberikan dataset test. 
