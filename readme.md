@@ -83,7 +83,7 @@ Dalam fungsi classification_report dapat menampilkan beberapa metrcis seperti be
 - _Recall_ digunakan untuk mengukur kemampuan model untuk memprediksi kelas _True Positive
 	Rumus Recall: $\dfrac{True Positive}{True Positive + False Negative}$
 - _F1-Score_ digunakan untuk mencari titik seimbang antara Presisi dan _Recall
-	Rumus F1-Score: $\dfrac{2*Precision*Recall}{Precision+Recall}$
+	Rumus F1-Score: $\dfrac{2 \ast Precision \ast Recall}{Precision+Recall}$
 
 |              | precision | recall | f1-score | support |
 | ------------ | --------- | ------ | -------- | ------- |
