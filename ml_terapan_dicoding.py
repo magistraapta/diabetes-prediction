@@ -83,12 +83,25 @@ df.head()
 corr = df.corr()
 sns.heatmap(corr, fmt='.2f', annot=True)
 
-"""after looking at the correlation map we can say that blood_glucose_level and HbA1c_level have the biggest correlation to target (diabetes)"""
+"""after looking at the correlation map we can say that blood_glucose_level and HbA1c_level have the biggest correlation to target (diabetes)
+
+**Handle Imbalence Data**
+"""
+
+df['diabetes'].value_counts().plot(kind='bar')
+
+"""Base on that image our data seems like imbalence between person without diabetes and person with diabetes, so we need to make the data balance I'm choose to use under sampling method to make the data balance."""
+
+from imblearn.under_sampling import RandomUnderSampler
+
+rus = RandomUnderSampler()
 
 X = df.drop(columns='diabetes')
 y = df['diabetes']
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+X_resampled, y_resampled = rus.fit_resample(X,y)
+
+X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled, test_size=0.2, random_state=0)
 
 """# Modeling"""
 
@@ -107,5 +120,5 @@ disp = metrics.ConfusionMatrixDisplay(confusion_matrix=cm)
 disp.plot()
 
 """# Conclusion
-After we do some visualization from dataset I can conclude that **people with high HbA1c Level and Blood Glucose Level tend to have diabetes condition**. To predict people that have diabetes I'm using **Linear Regression model** to do the prediction and I got **95% accuracy**.
+After we do some visualization from dataset I can conclude that **people with high HbA1c Level and Blood Glucose Level tend to have diabetes condition**. To predict people that have diabetes I'm using **Linear Regression model** to do the prediction and I got **91% accuracy**.
 """

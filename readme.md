@@ -87,18 +87,18 @@ Dalam fungsi classification_report dapat menampilkan beberapa metrcis seperti be
 
 |              | precision | recall | f1-score | support |
 | ------------ | --------- | ------ | -------- | ------- |
-| 0            | 1.00      | 0.97   | 0.98     | 18751   |
-| 1            | 0.68      | 0.94   | 0.80     | 1249    |
-| accuracy     |           |        | 0.97     | 20000   |
-| macro avg    | 0.84      | 0.96   | 0.89     | 20000   |
-| weighted avg | 0.98      | 0.97   | 0.97     | 20000   |
+| 0            | 0.91      | 0.91   | 0.91     | 1693    |
+| 1            | 0.91      | 0.91   | 0.91     | 1707    |
+| accuracy     |           |        | 0.91     | 3400    |
+| macro avg    | 0.91      | 0.91   | 0.91     | 3400    |
+| weighted avg | 0.91      | 0.91   | 0.91     | 3400    |
 Dari tabel classification_report tersebut dapat kita ambil bahwa:
-- Precision: Model yang saya gunakan dapat dengan baik untuk memprediksi dataset terhadap orang yang tidak memiliki diabetes sebesar 100%, sedangkan untuk data  terhadap orang yang memiliki diabetes sebesar 68%.
-- Recall: Model yang saya gunakan mendapatkan hasil untuk data tidak memiliki diabetes sebesar 97%, sedangkan untuk orang yang memiliki diabetes sebesar 94%.
-- F1-Score: Dari model yang saya gunakan telah berhasil memprediksi data untuk tidak memiliki diabetes sebesar 98% sedangkan untuk data orang yang memiliki diabetes sebesar 80%
+- Precision: Model yang saya gunakan dapat dengan baik untuk memprediksi dataset terhadap orang yang tidak memiliki diabetes dan yang memiliki diabetes sebesar 91%.
+- Recall: Model yang saya gunakan mendapatkan hasil untuk data tidak memiliki diabetes dan yang memiliki diabetes sebesar 91%.
+- F1-Score: Dari model yang saya gunakan telah berhasil memprediksi data untuk tidak memiliki diabetes dan yang memiliki diabetes sebesar 91%
 ## Kesimpulan
 Dari prediksi yang telah saya lakukan menggunakan model Random Forest dapat diambil kesimpulan sebagai berikut:
-- Telah berhasil membuat sebuah model machine learning yang dapat melakukan prediksi apakah seseorang mengalami risiko penyakit diabetes dengan mendapatkan akurasi sebesarr 97%.
+- Telah berhasil membuat sebuah model machine learning yang dapat melakukan prediksi apakah seseorang mengalami risiko penyakit diabetes dengan mendapatkan akurasi sebesar 91%.
 - Berdasarkan Exploratory Data Analysis yang telah dilakukan saya menemukan beberapa faktor utama yang dapat menyebabkan seseorang memiliki risiko penyakit diabetes. Faktor utama tersebut adalah tingginya HbA1c Level dan Blood Glucose Level, hal ini dapat terjadi dikarenakan tingginya level gula darah merupakan indikasi seseorang memiliki risiko penyakit diabetes.
 # Refrensi
 [1] Kharroubi, A.T., Darwish, H.M.: Diabetes mellitus: The epidemic of the
