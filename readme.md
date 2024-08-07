@@ -1,4 +1,4 @@
-# Domain Proyek
+# Latar Belakang
 Diabetes adalah penyakit kronis yang secara langsung memberikan dampak pada pankreas [1].
 Penyakit diabetes dapat menyebabkan penyakit lainnya pada kulit, syaraf, dan mata. Apabila tidak ditangani dengan baik diabetes dapat menyebabkan gagal ginjal. Berdasarkan IDF (International Diabetes Federation) statistik, sebanyak 500 juta orang telah mengidap diabetes pada tahun 2021 [2].
 
@@ -6,10 +6,11 @@ Melakukan deteksi dini dan pencegahan terhadap diabetes secara signifikan dapat 
 # Business Understanding
 
 ## Problem Statement
-Berdasarkan latar belakang di atas, maka saya mendapatkan problem statement sebagai berikut:
+Berdasarkan latar belakang di atas, maka didapatkan problem statement sebagai berikut:
 - Bagaimana cara membuat sebuah model yang dapat memprediksi seseorang yang memiliki risiko penyakit diabetes menggunakan catatan medis dengan akurat?
 - Apa saja faktor utama yang dapat menyebabkan seseorang memiliki risiko penyakit diabetes?
 ## Goals
+Berdasarkan problem statement tersebut maka didapatkan tujuan sebegai berikut:
 - Membangun sebuah model machine learning dengan akurasi tinggi yang dapat memprediksi risiko penyakit diabetes.
 - Mengidentifikasi faktor utama yang dapat menyebabkan diabetes
 # Data Understanding
@@ -77,6 +78,7 @@ y = df['diabetes']
 # menerapkan under sampling dan menyimpad hasil pada variabel yang baru
 X_resampled, y_resampled = rus.fit_resample(X,y)
 ```
+
 ## Split Dataset
 Dikarenakan tidak adanya test dataset yang diberikan maka saya perlu membagi dataset yang saya gunakan menjadi dua yaitu train_set dan test_set menggunakan train_test_split dari library Scikit-Learn. Pada kasus ini saya menggunakan train_test_split untuk membadi dataset menjadi train_set dan test_set dengan ukuran test_set sebesar 20% dari jumlah dataset. Sehingga rasio train_set dengan test_set menjadi 80:20.
 
@@ -88,11 +90,17 @@ y = df['diabetes']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 ```
-# Modelling
+# Modelling (Need more explanation)
 Pada tahap modelling dikarenakan pada projek ini bertujuan untuk memprediksi apakah seseorang memiliki risiko diabetes atau tidak berarti untuk kasus ini termasuk kasus klasifikasi sebab kita harus membedakan antara orang yang memiliki risiko penyakit diabetes dengan yang tidak. 
 
 Untuk melakukan prediksi tersebut saya menggunakan linear model dari Scikit-learn yaitu Random Forest Classifier dengan basic parameter. Random Forest adalah salah satu model yang cukup sering digunakan untuk melakukan klasifikasi. Random Forest bisa memberikan hasil yang lebih akurat karena dapat menggabungkan hasil dari banyak Decision Tree yang berbeda. Selain itu, model Random Forest juga cukup tahan terhadap overfitting jika dibandingkan dengan model ensemble learning lainnya.
-
+## Tahapan yang dilakukan
+Dalam penerapan Random Forest Classifier untuk melakukan klasifikasi terdapat beberapa tahapan sebagai berikut:
+- Melatih model dengan algoritma ensemble learning Random Forest.
+- Dalam proses training, model Random Forest Classifier menggunakan parameter bawaan dari Scikit-learn.
+- Setelah model dilatih menggunakan data training. Kemudia dilakukan uji coba menggunakan data test.
+- Setelah berhasil melakukan uji coba menggunakan data testing, selanjutnya dilakukan evaluasi menggunakan classification_report dari Scikit-learn.
+- Menggunakan metrics classification_report didapatkan hasil akurasi dari model yang digunakan sebesar 91%.
 # Evaluasi
 Setelah melakukan training dengan train_set menggunakan model Random Forest, saya melakulan evaluasi dengan metrics classification_report dari library Scikit-learn untuk mengecek hasil dari model yang sudah di train dengan memberikan dataset test. 
 
@@ -122,6 +130,6 @@ Dari prediksi yang telah saya lakukan menggunakan model Random Forest dapat diam
 - Berdasarkan Exploratory Data Analysis yang telah dilakukan saya menemukan beberapa faktor utama yang dapat menyebabkan seseorang memiliki risiko penyakit diabetes. Faktor utama tersebut adalah tingginya HbA1c Level dan Blood Glucose Level, hal ini dapat terjadi dikarenakan tingginya level gula darah merupakan indikasi seseorang memiliki risiko penyakit diabetes.
 # Refrensi
 [1] Kharroubi, A.T., Darwish, H.M.: Diabetes mellitus: The epidemic of the
-century. World J. Diabetes 6, 850–867 (2015).
+century. World J. Diabetes 6, 850–867 (2015)
 [2] Atlas, G.: Diabetes. International Diabetes Federation. 10th ed., IDF
 Diabetes Atlas.
