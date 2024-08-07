@@ -36,7 +36,8 @@ df['gender'].value_counts().plot(kind='bar')
 plt.xticks(rotation=0)
 plt.title('Gender Distribution')
 
-sns.histplot(df['age'], kde=True, bins=15)
+sns.histplot(data=df, x='age', kde=True, bins=15, hue='diabetes')
+plt.title('Age Distribution')
 
 df['hypertension'].value_counts().plot(kind='bar')
 plt.xticks(rotation=0)
