@@ -29,13 +29,13 @@ Variabel-variable yang ada pada dataset tersebut adalah sebagai berikut:
 Pada proses Exploratory Data Analysis (EDA) bertujuan untuk menganalisis karakteristik dan menemukan pola pada data yang digunakan. Pada proses EDA ini saya membagi menjadi dua bagian yaitu Univariate dan Multivariate Analysis.
 ### Univariate Data Analysis
 
-![age distribution](https://github.com/user-attachments/assets/bae602e1-6fe8-4920-ba6c-b4a5f0559c98)
-Berdasarkan grafik tersebut kita dapat meliat persebaran umur yang ada pada dataset.
+![age_dist](https://github.com/user-attachments/assets/026c4c45-1c20-45b9-bd07-7082506f6541)
+Terlihat pada grafik di atas menampilkan distribusi umur dari dataset yang digunakan. Dapat terlihat bahwa orang yang memiliki risiko penyakit diabetes memiliki umur lebih dari 30 tahun.
 ### Multivariate Data Analysis
-![blood_diabet](https://github.com/user-attachments/assets/101e7ecb-a83c-4072-ae16-77be4cc09ec0)
-Berdasarkan grafik di atas kita dapat melihat bahwa orang dengan HbA1c Level yang tinggi cenderung mengalami penyakit diabetes.
+![blood_glu](https://github.com/user-attachments/assets/729eca3e-c2d2-4884-9d51-c6fe16f8805f)
+Pada grafik tersebut dapat terlihat bahwa orang yang memiliki risiko penyakit diabetes cenderung memiliki Blood Glucose Level (level gula darah) yang lebih tinggi.
 ![corr_matrix](https://github.com/user-attachments/assets/d97a9f6c-b1b8-4e34-aa67-49de579bae19)
-Selanjutnya kita dapat menggunakan correlation matrix untuk mengetahui seberapa dekat hubungan antar fitur dengan target. Pada gambar di atas dapat kita lihat bahwa fitur "bloog_glucose_leve" dan "HbA1c_leve" memiliki nilai korelasi yang paling besar terhadap target pada dataset yaitu diabetes. 
+Pada grafik di atas dapat terlihat bahwa HbA1c Level dan Blood Glucose Level memiliki korelasi tertinggi dibandingkan fitur lainnya, ini menggambarkan bahwa orang yang memiliki HbA1c Level dan Blood Glucose Level cenderung memiliki risiko penyakit diabetes.
 # Data Preperation
 
 ## Encoding Features
@@ -58,6 +58,25 @@ output: [0, 1]
 | 1      | 28.0 | 0            | 0             | 4               | 27.32 | 5.7         | 158                 | 0        |
 | 0      | 36.0 | 0            | 0             | 1               | 23.45 | 5.0         | 155                 | 0        |
 | 1      | 76.0 | 1            | 1             | 1               | 20.14 | 4.8         | 155                 | 0        |
+## Under Sampling
+![imba](https://github.com/user-attachments/assets/d72b598c-6975-4041-a424-73803afd4b75)
+Pada grafik di atas dapat terlihat bahwa dataset yang digunakan ternyata memiliki ketidakseimbangan antara orang yang tidak memiliki risiko penyakit diabetes dengan orang yang memiliki risiko penyakit diabetes. Hal tersebut dapat mempengaruhi hasil prediksi dari model yang akan dibuat dan akan menciptakan bias.
+
+Salah satu metode untuk mengatasi data yang tidak seimbang adalah metode Under Samping, yaitu mengurangi jumlah mayoritas data agar sama dengan data minoritas. Untuk melakukan metode under sampling dapat menggunakan library Imblearn.
+
+```Python
+#import library
+from imblearn.under_sampling import RandomUnderSampler
+# inisialisasi 
+rus = RandomUnderSampler()
+
+# setup data yang akan di undersample
+X = df.drop(columns='diabetes')
+y = df['diabetes']
+
+# menerapkan under sampling dan menyimpad hasil pada variabel yang baru
+X_resampled, y_resampled = rus.fit_resample(X,y)
+```
 ## Split Dataset
 Dikarenakan tidak adanya test dataset yang diberikan maka saya perlu membagi dataset yang saya gunakan menjadi dua yaitu train_set dan test_set menggunakan train_test_split dari library Scikit-Learn. Pada kasus ini saya menggunakan train_test_split untuk membadi dataset menjadi train_set dan test_set dengan ukuran test_set sebesar 20% dari jumlah dataset. Sehingga rasio train_set dengan test_set menjadi 80:20.
 
@@ -72,9 +91,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # Modelling
 Pada tahap modelling dikarenakan pada projek ini bertujuan untuk memprediksi apakah seseorang memiliki risiko diabetes atau tidak berarti untuk kasus ini termasuk kasus klasifikasi sebab kita harus membedakan antara orang yang memiliki risiko penyakit diabetes dengan yang tidak. 
 
-Untuk melakukan prediksi tersebut saya menggunakan model ensemble learning dari Scikit-learn yaitu Random Forest Classifier dengan basic parameter. Random Forest adalah salah satu model yang cukup sering digunakan untuk melakukan klasifikasi. Sedankgan ensemble learning adalah sebuah teknik dalam machine learning di mana beberapa model digabungkan untuk meningkatkan kinerja prediksi. 
-
-Random Forest bisa memberikan hasil yang lebih akurat karena dapat menggabungkan hasil dari banyak Decision Tree yang berbeda. Selain itu, model Random Forest juga cukup tahan terhadap overfitting jika dibandingkan dengan model ensemble learning lainnya.
+Untuk melakukan prediksi tersebut saya menggunakan linear model dari Scikit-learn yaitu Random Forest Classifier dengan basic parameter. Random Forest adalah salah satu model yang cukup sering digunakan untuk melakukan klasifikasi. Random Forest bisa memberikan hasil yang lebih akurat karena dapat menggabungkan hasil dari banyak Decision Tree yang berbeda. Selain itu, model Random Forest juga cukup tahan terhadap overfitting jika dibandingkan dengan model ensemble learning lainnya.
 
 # Evaluasi
 Setelah melakukan training dengan train_set menggunakan model Random Forest, saya melakulan evaluasi dengan metrics classification_report dari library Scikit-learn untuk mengecek hasil dari model yang sudah di train dengan memberikan dataset test. 
@@ -89,22 +106,22 @@ Dalam fungsi classification_report dapat menampilkan beberapa metrcis seperti be
 
 |              | precision | recall | f1-score | support |
 | ------------ | --------- | ------ | -------- | ------- |
-| 0            | 0.91      | 0.91   | 0.91     | 1693    |
-| 1            | 0.91      | 0.91   | 0.91     | 1707    |
-| accuracy     |           |        | 0.91     | 3400    |
-| macro avg    | 0.91      | 0.91   | 0.91     | 3400    |
-| weighted avg | 0.91      | 0.91   | 0.91     | 3400    |
+| 0            | 1.00      | 0.97   | 0.98     | 18751   |
+| 1            | 0.68      | 0.94   | 0.80     | 1249    |
+| accuracy     |           |        | 0.97     | 20000   |
+| macro avg    | 0.84      | 0.96   | 0.89     | 20000   |
+| weighted avg | 0.98      | 0.97   | 0.97     | 20000   |
 
 Dari tabel classification_report tersebut dapat kita ambil bahwa:
-- Precision: Model yang saya gunakan dapat dengan baik untuk memprediksi dataset terhadap orang yang tidak memiliki diabetes dan yang memiliki diabetes sebesar 91%.
-- Recall: Model yang saya gunakan mendapatkan hasil untuk data tidak memiliki diabetes dan yang memiliki diabetes sebesar 91%.
-- F1-Score: Dari model yang saya gunakan telah berhasil memprediksi data untuk tidak memiliki diabetes dan yang memiliki diabetes sebesar 91%
+- Precision: Model yang saya gunakan dapat dengan baik untuk memprediksi dataset terhadap orang yang tidak memiliki diabetes sebesar 100%, sedangkan untuk data  terhadap orang yang memiliki diabetes sebesar 68%.
+- Recall: Model yang saya gunakan mendapatkan hasil untuk data tidak memiliki diabetes sebesar 97%, sedangkan untuk orang yang memiliki diabetes sebesar 94%.
+- F1-Score: Dari model yang saya gunakan telah berhasil memprediksi data untuk tidak memiliki diabetes sebesar 98% sedangkan untuk data orang yang memiliki diabetes sebesar 80%
 ## Kesimpulan
 Dari prediksi yang telah saya lakukan menggunakan model Random Forest dapat diambil kesimpulan sebagai berikut:
-- Telah berhasil membuat sebuah model machine learning yang dapat melakukan prediksi apakah seseorang mengalami risiko penyakit diabetes dengan mendapatkan akurasi sebesar 91%.
+- Telah berhasil membuat sebuah model machine learning yang dapat melakukan prediksi apakah seseorang mengalami risiko penyakit diabetes dengan mendapatkan akurasi sebesarr 97%.
 - Berdasarkan Exploratory Data Analysis yang telah dilakukan saya menemukan beberapa faktor utama yang dapat menyebabkan seseorang memiliki risiko penyakit diabetes. Faktor utama tersebut adalah tingginya HbA1c Level dan Blood Glucose Level, hal ini dapat terjadi dikarenakan tingginya level gula darah merupakan indikasi seseorang memiliki risiko penyakit diabetes.
 # Refrensi
 [1] Kharroubi, A.T., Darwish, H.M.: Diabetes mellitus: The epidemic of the
-century. World J. Diabetes 6, 850–867 (2015)
+century. World J. Diabetes 6, 850–867 (2015).
 [2] Atlas, G.: Diabetes. International Diabetes Federation. 10th ed., IDF
 Diabetes Atlas.
